@@ -1,19 +1,30 @@
 require 'pry'
 require "tty-prompt"
+require 'colorize'
+require "tty-font"
+
 
 # puts `clear`
 
 NEW_LINE = "\n"
 
+def header
+    font = TTY::Font.new(:starwars)
+    puts font.write("recipe finder").colorize(:green)
+end
+
 def welcome
-    
-    puts "Welcome, hungry human!"
+    puts header
+    puts "\n"
+    puts "Welcome, Hungry Human!".colorize(:blue)
+    puts "\n"
     prompt = TTY::Prompt.new
     user_input = prompt.select("What type of user are you?", %w(New Existing))
     if user_input == "New"
         puts "Please create username"
         a = gets.chomp
         puts `clear`
+        puts header
         new_user = User.create(:username => a)
         puts "Welcome #{a}"
         puts options(new_user)
@@ -29,7 +40,7 @@ end
     
 
 def options(new_user)
-    puts "HOME"
+    puts "\n"
     prompt = TTY::Prompt.new
     # user_input = prompt.select("What would you like to do today?", %w(Search recipes by keyword "Search recipes by calories", "View favorited search_recipes_by_ingredient"))
     user = prompt.select("What would you like to do today?") do |menu|
@@ -38,9 +49,11 @@ def options(new_user)
         menu.choice 'View favorites'
         end
         puts `clear`
+        puts header
         if  user == "Search recipe by keyword"
-            puts "What ingredient would you like to search recipes for?"
+            puts "What ingredient would you like to search recipes for?".colorize(:magenta)
             input = gets.chomp.capitalize
+            puts "\n"
             search = Recipe.where("title like ?", "%#{input}%") #returns all Chicken recipes
             array = []
             search.each.with_index(1) do |s,i|
@@ -65,7 +78,7 @@ def options(new_user)
                     puts chicken_select(x, new_user)
                 end
         elsif user == "Search recipe by calories"
-            puts "How many calories would you like your meal to be within?"
+            puts "How many calories would you like your meal to be within?".colorize(:magenta)
             calories = gets.chomp.to_f
             search = Recipe.where("calories < ?", calories)
             array = []
@@ -91,26 +104,31 @@ def options(new_user)
                     puts chicken_select(x, new_user)
                 end
         elsif user == "View favorites"
-            puts "My Favorites"
+            puts "My Favorites".colorize(:magenta)
+            puts "\n"
             if view_favorites(new_user).empty? 
                 puts "You have no favorite recipes :("
             else
                 puts view_favorites(new_user)
+                puts "\n"
                 prompt = TTY::Prompt.new
             # user_input = prompt.select("What would you like to do today?", %w(Search recipes by keyword "Search recipes by calories", "View favorited search_recipes_by_ingredient"))
                 userprompt = prompt.select("Menu") do |menu|
                     menu.choice 'Delete_Favorite'
-                    menu.choice 'Return_Home'
+                    menu.choice 'Return_Home?'
                     end
-                if userprompt == "Return_Home"
+                if userprompt == "Return_Home?"
                         puts options(new_user)
                 elsif userprompt == "Delete_Favorite"
                     puts `clear`
+                    puts header
                     puts delete_title(new_user)
                     puts "\n"
                     puts "Return Home (y/n)"
                         input = gets.chomp
                         if input == "y"
+                            puts `clear`
+                            puts header
                             puts options(new_user)
                         elsif input == "n"
                             puts "Seeya Later!"
@@ -128,10 +146,11 @@ end
 
 def chicken_select(x, new_user)
     puts `clear`
-    puts "Title - \n #{x.title}"
-    puts "Ingredients - \n #{x.ingredients}"
-    puts "Directions - \n #{x.directions}"
-    puts "Calories - \n #{x.calories}"
+    puts header
+    puts "Title - \n #{x.title}".colorize(:blue)
+    puts "Ingredients - \n #{x.ingredients}".colorize(:blue)
+    puts "Directions - \n #{x.directions}".colorize(:blue)
+    puts "Calories - \n #{x.calories}".colorize(:blue)
     puts "\n"
     ################################ADD TTY PROMPT##########################################
     puts "1. ♥ Add to Favorites"
@@ -141,6 +160,7 @@ def chicken_select(x, new_user)
         create_favorite(new_user, x)
         puts "Added #{x.title} to Favorites!"
         puts `clear`
+        puts header
         puts options(new_user)
     elsif input == 2
         puts options
@@ -204,8 +224,10 @@ def delete_title(new_user)
             else ""
             end
         end
+        puts "\n"
     puts "You have deleted #{answer} from your favourites"
     # binding.pry
 
 end
-                
+               
+# puts String.colors
