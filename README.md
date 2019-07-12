@@ -61,35 +61,47 @@ ActiveRecord::Base.logger = nil
 ```
 ---
 
-ToDo List:
-- Update Readme file 
-- Mock CSV files for user, recipe, and favorite.
-- Set up environment.
-- Create database via migration.
-- Seed.
-- Create models for user, recipe, and favorite.
-- Double check schema.
-- Create run.rb.
+RECIPE FINDER CLI APP
 
----
+Description
+User can search for recipes on the "Recipe Finder" app by keyword and calories. The user can access different recipes and save their favorite recipes in their own "Favorites" directory. 
 
-Create 
-- Grace = User
-- Baron = Recipe
-- Both = Favorite
+--------------
 
-Read
-- User - Searching/querying database for recipe based on ingredient.
-- User - Searching/querying database for recipe based on calories/serving.
-- User - Read self favorites list.
-- Recipes - Read self favorite count.
-? Recipes - Read self reviews count.
+Install Instructions
 
-Update
-- User - Update and delete favorites.
-- User - Update username.
+Run 'ruby bin/run.rb' in terminal to execute the CLI app. 
 
-Delete
-- Delete favorites.
-- Delete user account.
-- Delete review.
+--------------
+
+User Story
+
+As user will have the following functionality with this app:
+1. User can create new user account or go to existing user account (create / read)
+2. User can search in the recipe database and retrieve a recipe, using a keyword.(read)
+3. User can search in the recipe database and retrieve a recipe, by calories. (read)
+4. User can save (create) a recipe to their favorites list (update)
+5. User can view and retrieve information from their favorites list (read)
+6. User can remove a favorited recipe from their favorites list (delete)
+
+
+--------------
+
+Ruby Models and relationships
+
+1. Recipes 
+      Has many users through favorites
+      Has many favorites
+2. Users
+      Users have many favorites
+      Users have many recipes through favorites
+3. Favorites
+      Belongs to recipes 
+      Belongs to users
+
+---------------
+
+Contributors
+
+Baron Lip
+Grace Tan
