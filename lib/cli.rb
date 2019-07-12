@@ -26,13 +26,13 @@ def welcome
         puts `clear`
         puts header
         new_user = User.create(:username => a)
-        puts "Welcome #{a}"
+        puts "Welcome, #{a}!".colorize(:magenta)
         puts options(new_user)
         # binding.pry
     elsif user_input == "Existing"
         puts "Please enter username"
         name = gets.chomp
-        puts "Welcome back, #{name}."
+        puts "Welcome back, #{name}.".colorize(:magenta)
         puts options(new_user)
         else puts ''
     end
@@ -114,12 +114,14 @@ def options(new_user)
                 prompt = TTY::Prompt.new
             # user_input = prompt.select("What would you like to do today?", %w(Search recipes by keyword "Search recipes by calories", "View favorited search_recipes_by_ingredient"))
                 userprompt = prompt.select("Menu") do |menu|
-                    menu.choice 'Delete_Favorite'
+                    menu.choice 'Delete_Favorites'
                     menu.choice 'Return_Home?'
                     end
                 if userprompt == "Return_Home?"
-                        puts options(new_user)
-                elsif userprompt == "Delete_Favorite"
+                    puts `clear`
+                    puts header    
+                    puts options(new_user)
+                elsif userprompt == "Delete_Favorites"
                     puts `clear`
                     puts header
                     puts delete_title(new_user)
@@ -147,10 +149,17 @@ end
 def chicken_select(x, new_user)
     puts `clear`
     puts header
-    puts "Title - \n #{x.title}".colorize(:blue)
-    puts "Ingredients - \n #{x.ingredients}".colorize(:blue)
-    puts "Directions - \n #{x.directions}".colorize(:blue)
-    puts "Calories - \n #{x.calories}".colorize(:blue)
+    puts "Title -"
+    puts "#{x.title}".colorize(:blue)
+    puts "\n"
+    puts "Ingredients - "
+    puts "#{x.ingredients}".colorize(:blue)
+    puts "\n"
+    puts "Directions - "
+    puts "#{x.directions}".colorize(:blue)
+    puts "\n"
+    puts "Calories - "
+    puts "#{x.calories}".colorize(:blue)
     puts "\n"
     ################################ADD TTY PROMPT##########################################
     puts "1. ♥ Add to Favorites"
@@ -158,12 +167,16 @@ def chicken_select(x, new_user)
     input = gets.chomp.to_i
     if input == 1
         create_favorite(new_user, x)
-        puts "Added #{x.title} to Favorites!"
+        puts "Added #{x.title} to Favorites! :)".colorize(:green)
+        sleep(2)
         puts `clear`
         puts header
         puts options(new_user)
     elsif input == 2
-        puts options
+        puts `clear`
+        puts header
+        puts "Welcome back!"
+        puts options(new_user)
     else puts "Bok bok, try again :("
         ########################ADD ASSCI of DEAD CHICKEN#####################################
     end
@@ -225,9 +238,7 @@ def delete_title(new_user)
             end
         end
         puts "\n"
-    puts "You have deleted #{answer} from your favourites"
-    # binding.pry
-
+    puts "#{answer} has been deleted from your favourites!".colorize(:green)
 end
                
 # puts String.colors
