@@ -1,9 +1,9 @@
+# ! This is the main code for the application
+
 require 'pry'
 require "tty-prompt"
 require 'colorize'
 require "tty-font"
-
-
 # puts `clear`
 
 NEW_LINE = "\n"
@@ -63,19 +63,19 @@ def options(new_user)
             selected_num = gets.chomp.to_i
                 if selected_num == 1
                     x = Recipe.find(selected_num)
-                    puts chicken_select(x, new_user)
+                    puts selected_recipe(x, new_user)
                 elsif selected_num == 2
                     x =  Recipe.find(selected_num)
-                    puts chicken_select(x, new_user)
+                    puts selected_recipe(x, new_user)
                 elsif selected_num == 3
                     x = Recipe.find(selected_num)
-                    puts chicken_select(x, new_user)
+                    puts selected_recipe(x, new_user)
                 elsif selected_num == 4
                     x =  Recipe.find(selected_num)
-                    puts chicken_select(x, new_user)
+                    puts selected_recipe(x, new_user)
                 elsif selected_num == 5
                     x =  Recipe.find(selected_num)
-                    puts chicken_select(x, new_user)
+                    puts selected_recipe(x, new_user)
                 end
         elsif user == "Search recipe by calories"
             puts "How many calories would you like your meal to be within?".colorize(:magenta)
@@ -89,19 +89,19 @@ def options(new_user)
             selected_num = gets.chomp.to_i
                 if selected_num == 1
                     x = Recipe.find(selected_num)
-                    puts chicken_select(x, new_user)
+                    puts selected_recipe(x, new_user)
                 elsif selected_num == 2
                     x =  Recipe.find(selected_num)
-                    puts chicken_select(x, new_user)
+                    puts selected_recipe(x, new_user)
                 elsif selected_num == 3
                     x = Recipe.find(selected_num)
-                    puts chicken_select(x, new_user)
+                    puts selected_recipe(x, new_user)
                 elsif selected_num == 4
                     x =  Recipe.find(selected_num)
-                    puts chicken_select(x, new_user)
+                    puts selected_recipe(x, new_user)
                 elsif selected_num == 5
                     x =  Recipe.find(selected_num)
-                    puts chicken_select(x, new_user)
+                    puts selected_recipe(x, new_user)
                 end
         elsif user == "View favorites"
             puts "My Favorites".colorize(:magenta)
@@ -145,8 +145,7 @@ def options(new_user)
 end
 
 
-
-def chicken_select(x, new_user)
+def selected_recipe(x, new_user)
     puts `clear`
     puts header
     puts "Title -"
@@ -181,7 +180,6 @@ def chicken_select(x, new_user)
         ########################ADD ASSCI of DEAD CHICKEN#####################################
     end
 end
-
 
 
 def create_favorite(new_user, recipe)

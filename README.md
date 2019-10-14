@@ -3,6 +3,7 @@ RECIPE FINDER CLI APP
 Description
 - User can search for recipes on the "Recipe Finder" app by keyword and calories. 
 - The user can access different recipes and save their favorite recipes in their own "Favorites" directory. 
+- Note, this application is manually seeded with data, therefore currently the application is restricted to the keyword search of "chicken"
 
 --------------
 

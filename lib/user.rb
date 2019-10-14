@@ -18,8 +18,6 @@ class User < ActiveRecord::Base
         User.find_by(username: username)
     end
 
-
-
 # # User can add a recipe to their favorites
 #     def add_favorites
 #         Favorite.create(self,recipe)
