@@ -28,5 +28,5 @@ As user will have the following functionality with this app:
 --------------
 Contributors
 
-- Baron Lip (@BaronLip)
-- Grace Tan (@gracet37)
+- Baron Lip (github: @BaronLip)
+- Grace Tan (github: @gracet37)
