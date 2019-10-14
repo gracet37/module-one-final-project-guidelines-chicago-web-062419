@@ -1,5 +1,9 @@
 RECIPE FINDER CLI APP
 
+![](https://media.giphy.com/media/Wsp2RtRDXBqHsI1f8g/giphy.gif)
+
+Full Demo Video: https://youtu.be/c6Lyjmbsd7M
+
 Description
 - User can search for recipes on the "Recipe Finder" app by keyword and calories. 
 - The user can access different recipes and save their favorite recipes in their own "Favorites" directory. 
